@@ -1,0 +1,171 @@
+{
+  "uid" : "e0255a00bf2473f",
+  "name" : "test_login_1",
+  "fullName" : "Testcase.test_case_login.Test_login#test_login_1",
+  "historyId" : "b1ed499ad15180392216d15341c80756",
+  "time" : {
+    "start" : 1594891903785,
+    "stop" : 1594891910038,
+    "duration" : 6253
+  },
+  "description" : "测试输入错误用户名密码登陆",
+  "descriptionHtml" : "<p>测试输入错误用户名密码登陆</p>\n",
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert '' == '进入技能组成功'\n  - 进入技能组成功",
+  "statusTrace" : "self = <Testcase.test_case_login.Test_login object at 0x7fb7109765e0>\n\n    @allure.feature(\"登陆模块\")\n    @allure.story(\"输入正确用户名密码\")\n    @allure.severity(allure.severity_level.BLOCKER)\n    @allure.testcase(url=\"www.baidu.com\",name='该用例bug')\n    @allure.description(\"测试输入错误用户名密码登陆\")\n    def test_login_1(self):\n        title=self.page.inputusername(readconfig.username).inputpassword(readconfig.password).loginagent().loginjid()\n        try:\n            assert title=='进入技能组成功'\n        except Exception as e:\n            print(\"进入技能组失败\")\n>           raise e\n\nTestcase/test_case_login.py:21: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Testcase.test_case_login.Test_login object at 0x7fb7109765e0>\n\n    @allure.feature(\"登陆模块\")\n    @allure.story(\"输入正确用户名密码\")\n    @allure.severity(allure.severity_level.BLOCKER)\n    @allure.testcase(url=\"www.baidu.com\",name='该用例bug')\n    @allure.description(\"测试输入错误用户名密码登陆\")\n    def test_login_1(self):\n        title=self.page.inputusername(readconfig.username).inputpassword(readconfig.password).loginagent().loginjid()\n        try:\n>           assert title=='进入技能组成功'\nE           AssertionError: assert '' == '进入技能组成功'\nE             - 进入技能组成功\n\nTestcase/test_case_login.py:18: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "start_browser",
+    "time" : {
+      "start" : 1594891900489,
+      "stop" : 1594891903784,
+      "duration" : 3295
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "__pytest_repeat_step_number",
+    "time" : {
+      "start" : 1594891903784,
+      "stop" : 1594891903784,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "bulid_env",
+    "time" : {
+      "start" : 1594891900486,
+      "stop" : 1594891900489,
+      "duration" : 3
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "description" : "测试输入错误用户名密码登陆",
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert '' == '进入技能组成功'\n  - 进入技能组成功",
+    "statusTrace" : "self = <Testcase.test_case_login.Test_login object at 0x7fb7109765e0>\n\n    @allure.feature(\"登陆模块\")\n    @allure.story(\"输入正确用户名密码\")\n    @allure.severity(allure.severity_level.BLOCKER)\n    @allure.testcase(url=\"www.baidu.com\",name='该用例bug')\n    @allure.description(\"测试输入错误用户名密码登陆\")\n    def test_login_1(self):\n        title=self.page.inputusername(readconfig.username).inputpassword(readconfig.password).loginagent().loginjid()\n        try:\n            assert title=='进入技能组成功'\n        except Exception as e:\n            print(\"进入技能组失败\")\n>           raise e\n\nTestcase/test_case_login.py:21: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Testcase.test_case_login.Test_login object at 0x7fb7109765e0>\n\n    @allure.feature(\"登陆模块\")\n    @allure.story(\"输入正确用户名密码\")\n    @allure.severity(allure.severity_level.BLOCKER)\n    @allure.testcase(url=\"www.baidu.com\",name='该用例bug')\n    @allure.description(\"测试输入错误用户名密码登陆\")\n    def test_login_1(self):\n        title=self.page.inputusername(readconfig.username).inputpassword(readconfig.password).loginagent().loginjid()\n        try:\n>           assert title=='进入技能组成功'\nE           AssertionError: assert '' == '进入技能组成功'\nE             - 进入技能组成功\n\nTestcase/test_case_login.py:18: AssertionError",
+    "steps" : [ {
+      "name" : "添加失败截图...",
+      "time" : {
+        "start" : 1594891910099,
+        "stop" : 1594891911517,
+        "duration" : 1418
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "94340d2571cfb517",
+        "name" : "2020-07-16-17_31_50失败截图",
+        "source" : "94340d2571cfb517.png",
+        "type" : "image/png",
+        "size" : 128756
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 1,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "start_browser::0",
+    "time" : {
+      "start" : 1594891911517,
+      "stop" : 1594891911628,
+      "duration" : 111
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "输入正确用户名密码"
+  }, {
+    "name" : "severity",
+    "value" : "blocker"
+  }, {
+    "name" : "feature",
+    "value" : "登陆模块"
+  }, {
+    "name" : "parentSuite",
+    "value" : "Testcase"
+  }, {
+    "name" : "suite",
+    "value" : "test_case_login"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_login"
+  }, {
+    "name" : "host",
+    "value" : "MacBook-Pro.local"
+  }, {
+    "name" : "thread",
+    "value" : "99481-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "Testcase.test_case_login"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ {
+    "name" : "该用例bug",
+    "url" : "www.baidu.com",
+    "type" : "test_case"
+  } ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "blocker",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "e0255a00bf2473f.json",
+  "parameterValues" : [ ]
+}

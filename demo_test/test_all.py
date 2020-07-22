@@ -15,15 +15,14 @@ class TestGrid:
         threads = []
         nloops = range(len(self.loops))
         for i in nloops:
-            t = threading.Thread(target=self.loop,args=(i,))
+            t = threading.Thread(target=self.loop)
             threads.append(t)
         for i in nloops:
             threads[i].start()
         for i in nloops:
             threads[i].join()
 
-    @classmethod
-    def loop(self,loops):
+    def loop(self):
         driver = Remote(command_executor=hub_url, desired_capabilities=capability)
         driver.get("https://www.baidu.com")
 

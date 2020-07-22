@@ -1,5 +1,6 @@
 import os
 import sys
+import threading
 from os import path
 import json
 
@@ -106,17 +107,17 @@ def import_history_data(history_save_dir, result_dir):
 
 
 # 运行命令参数配置
-def run_all_case(browser):
+def run_all_case(browser,nloops):
     """
     @param browser:传入浏览器，chrome/firefox/ie
     """
     # 测试结果文件存放目录
-    result_dir = os.path.abspath("./Report/{}/allure-result".format(browser))
+    result_dir = os.path.abspath("./Report/{}/allure-result{}".format(browser,nloops))
     # 测试报告文件存放目录
-    report_dir = os.path.abspath("./Report/{}/allure-report".format(browser))
+    report_dir = os.path.abspath("./Report/{}/allure-report{}".format(browser,nloops))
     # 本地测试历史结果文件存放目录，用于生成趋势图
-    history_dir = os.path.abspath("./Report/history/{}".format(browser))
-    Fileoption.create_dirs(history_dir)
+    # history_dir = os.path.abspath("./Report/history/{}".format(browser))
+    # Fileoption.create_dirs(history_dir)
     # 定义测试用例features集合
     # allure_features = ["--allure-features"]
     # allure_features_list = [
@@ -134,9 +135,9 @@ def run_all_case(browser):
     # 使用pytest.main
     pytest.main(run_args)
     # 生成allure报告，需要系统执行命令--clean会清楚以前写入environment.json的配置
-    cmd = 'allure generate ./Report/{}/allure-result -o ./Report/{}/allure-report --clean'.format(
-        browser.replace(" ", "_"),
-        browser.replace(" ", "_"))
+    cmd = 'allure generate ./Report/{}/allure-result{} -o ./Report/{}/allure-report{} --clean'.format(
+        browser.replace(" ", "_"),nloops,
+        browser.replace(" ", "_"),nloops)
     logging.info("命令行执行cmd:{}".format(cmd))
     print(f"cmd的命令:{cmd}")
     try:
@@ -147,9 +148,28 @@ def run_all_case(browser):
     # 定义allure报告环境信息
     # modify_report_environment_file(report_dir)
     # 保存历史数据
-    save_history(history_dir, report_dir)
+    # save_history(history_dir, report_dir)
 
+def loop(nloops):
+    run_all_case("chrome",nloops)
+
+def thread():
+    threads = []
+    loops=[1,2,3,4]
+    nloops = range(len(loops))
+    for i in nloops:
+        t = threading.Thread(target=loop,args=(nloops[i],))
+        threads.append(t)
+    for i in nloops:
+        threads[i].start()
+    for i in nloops:
+        threads[i].join()
 
 if __name__ == "__main__":
-
-     run_all_case("chrome")
+    thread()
+#Todo
+# 将thread方法封装一层，不直接写在run.py中
+# 全局增加默认值，非并发模式存储某文档中，并发模式时分开指明文档存储
+# 处理并发时日志写入混乱
+# 处理并发时登录不同账号
+# 处理allure报告合并成一份，处理histroy文件

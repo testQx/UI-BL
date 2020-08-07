@@ -6,6 +6,7 @@ from selenium import webdriver
 from loguru import logger
 from Config import readconfig
 import allure
+import run
 
 driver =None
 dirname = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -15,9 +16,10 @@ sys.path.append(dirname)
 # 当前时间值
 now = time.strftime("%Y-%m-%d-%H_%M_%S", time.localtime(time.time()))
 # 截图存放文件夹
-screenshot = dirname + f'/screenshot/{now}'
+screenshot = dirname + f'/screenshot/{run.thread_num}/{now}'
 
 def pytest_addoption(parser):
+    print("此时的值" + str(run.thread_num))
     """
     定义钩子函数hook进行命令行定义浏览器传参，默认chrome,定义浏览器启动方式传参，默认启动
     @param parser:
@@ -42,6 +44,8 @@ def pytest_collection_modifyitems(items):
         logger.info(item.name)
         item._nodeid = item._nodeid.encode("utf-8").decode("unicode_escape")
         logger.info(item._nodeid)
+        print("测试输出")
+        print(item.name,item._nodeid)
 
 
 
@@ -71,10 +75,10 @@ def pytest_runtest_makereport(item, call):
 def bulid_env():
     #新建log日志存放文件夹s
     log_level=readconfig.log_level
-    logger.add(f"{dirname}"+"/log/file_{time}.log", format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}",level=f"{log_level}")
+    logger.add(f"{dirname}"+"/log/"+f"{run.thread_num}/"+"file_{time}.log", format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}",level=f"{log_level}")
     isExists = os.path.exists(screenshot)
     if not isExists:
-        os.mkdir(screenshot)
+        os.makedirs(screenshot)
 
 
 #启动浏览器

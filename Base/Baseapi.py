@@ -47,7 +47,6 @@ class Baseapi:
         except Exception as e:
             self.mylog.error(f"找不到元素{element}")
 
-
     #   重写find_elements方法，增加定位元素的健壮性
     def find_elements(self, element):
         if not isinstance(element, tuple):
@@ -61,7 +60,6 @@ class Baseapi:
             return self.driver.find_elements(*element)
         except Exception as e:
             self.mylog.error(f"找不到元素{element}")
-
 
     # 完全关闭所有关联tab窗口的浏览器，在fixture中不使用该方法
     def quit_browse(self):
@@ -77,6 +75,7 @@ class Baseapi:
             pass
             self.mylog.error(u"关闭当前窗口失败原因： %s" % e)
             raise e
+
     # 浏览器前进操作
     def forward(self):
         self.driver.forward()
@@ -111,11 +110,10 @@ class Baseapi:
             el = self.element_light(element)
             el.clear()
             el.send_keys(text)
-            self.mylog.info(u"元素对象属于值成功，值为%s" %text)
+            self.mylog.info(u"元素对象属于值成功，值为%s" % text)
         except Exception as e:
             self.mylog.error("元素对象输入值失败，错误信息为：{}".format(e))
             raise e
-
 
     # 输入，重新send_keys,继续输入，不清空
     def send_keys(self, element, text):
@@ -142,7 +140,7 @@ class Baseapi:
         try:
             el = self.element_light(element)
             Select(el).select_by_visible_text(text)
-        except Exception as e: 
+        except Exception as e:
             self.mylog.error(u'找不到元素:' + str(element))
             raise e
 
@@ -154,6 +152,7 @@ class Baseapi:
         except Exception as e:
             self.mylog.error(u'找不到元素:' + str(element))
             raise e
+
     # 通过index获取下拉菜单元素并点击
     def select_element_index(self, element, index):
         try:
@@ -162,6 +161,7 @@ class Baseapi:
         except Exception as e:
             self.mylog.error(u'找不到元素:' + str(element))
             raise e
+
     # 获取元素的属性值
     # 例子<a class="left" target="_blank" href="http://www.csdn.net" onclick="LogClickCount(this,285);">首页</a>
     # 此例子不可获取"首页"两字，非text
@@ -176,6 +176,7 @@ class Baseapi:
         except Exception as e:
             self.mylog.error(u'切换iframe失败:' + str(element))
             raise e
+
     # 返回默认iframe
     def iframe_defalut(self):
         return self.driver.switch_to.default_content()
@@ -192,6 +193,7 @@ class Baseapi:
             # else:
             print(u"元素未被选中 %s" % el)
             raise e
+
     # 获取网页标题
     def get_page_title(self):
         logger.info("网页标题为： %s" % self.driver.title)
@@ -316,6 +318,12 @@ class Baseapi:
     def js_richbox(self, element, body):
         el = self.find_element(element)
         js = f'arguments[0].contentWindow.document.body.innerHTML="%s" %{body}'
+        self.driver.execute_script(js, el)
+
+    # 处理伪元素
+    def js_faker_elem(self, element):
+        el = self.find_element(element)
+        js = "return window.getComputedStyle(arguments[0], '::before').content"
         self.driver.execute_script(js, el)
 
 # Todo

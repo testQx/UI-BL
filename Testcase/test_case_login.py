@@ -20,6 +20,8 @@ class Test_login():
             print("进入技能组失败")
             raise e
 
+
+
     # @allure.feature("登陆模块")
     # @allure.story("输入错误用户名密码")
     # @allure.severity(allure.severity_level.BLOCKER)

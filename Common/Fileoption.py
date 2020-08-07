@@ -1,5 +1,6 @@
 import os
 import sys
+import zipfile
 from datetime import datetime
 
 import yaml
@@ -53,3 +54,20 @@ class Fileoption:
         """
         if not os.path.exists(file_dir):
             os.makedirs(file_dir)
+
+    @staticmethod
+    # 压缩文件
+    def compress_file(zip_file_name, dir_name):
+        """
+        目录压缩
+        :param zip_file_name: 压缩文件名称和位置
+        :param dir_name: 要压缩的目录
+        :return:
+        """
+        with zipfile.ZipFile(zip_file_name, 'w') as z:
+            for root, dirs, files in os.walk(dir_name):
+                file_path = root.replace(dir_name, '')
+                file_path = file_path and file_path + os.sep or ''
+                for filename in files:
+                    z.write(os.path.join(root, filename), os.path.join(file_path, filename))
+        print('压缩成功！')

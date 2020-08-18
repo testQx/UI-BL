@@ -19,7 +19,7 @@ now = time.strftime("%Y-%m-%d-%H_%M_%S", time.localtime(time.time()))
 screenshot = dirname + f'/screenshot/{run.thread_num}/{now}'
 
 def pytest_addoption(parser):
-    print("此时的值" + str(run.thread_num))
+
     """
     定义钩子函数hook进行命令行定义浏览器传参，默认chrome,定义浏览器启动方式传参，默认启动
     @param parser:
@@ -44,8 +44,7 @@ def pytest_collection_modifyitems(items):
         logger.info(item.name)
         item._nodeid = item._nodeid.encode("utf-8").decode("unicode_escape")
         logger.info(item._nodeid)
-        print("测试输出")
-        print(item.name,item._nodeid)
+
 
 
 

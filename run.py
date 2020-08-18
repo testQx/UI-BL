@@ -6,7 +6,6 @@ import sys
 import pytest
 
 from Common.Fileoption import Fileoption
-from Common.Publicmethod import Publicmethod
 
 root_dir = os.path.dirname(__file__)
 # config_yaml = Fileoption.read_yaml("./Conf/config.yaml")
@@ -97,7 +96,6 @@ def run_all_case(browser, nloops):
     # 测试结果文件存放目录
     global thread_num
     thread_num = nloops
-    print(thread_num)
     result_dir = os.path.abspath("./Report/{}/allure-result{}".format(browser, nloops))
     # 测试报告文件存放目录
     report_dir = os.path.abspath("./Report/{}/allure-report{}".format(browser, nloops))
@@ -114,7 +112,13 @@ def run_all_case(browser, nloops):
     # allure_stories = ["--allure-stories"]
     # allure_stories_args = ['']
     allure_path_args = ['--alluredir', result_dir, '--clean-alluredir']
-    test_args = ['-s', '-q']
+    # test_args = ['-s', '-q']
+    test_args = ['-s', '-q', '--reruns', '2', '--reruns-delay', '1', '--count', '1', '-n', '3']
+    # 添加['--ff']先运行上次失败用例，后运行其他用例
+    # 添加['--lf']只运行上次failed和error用例
+    # 添加['--reruns', 1','--reruns-delay','5'] 失败自动重新跑1次，间隔5秒
+    # 添加['--count=10'] 重复执行用例，重复10遍
+    run_args = test_args + allure_path_args
     run_args = test_args + allure_path_args
     print(f"run_args的完整参数：{run_args}")
     # 使用pytest.main
@@ -138,13 +142,22 @@ def run_all_case(browser, nloops):
     save_history(history_dir, report_dir)
 
 
-@Publicmethod.thread
+# @Publicmethod.thread
 def thread_main(i):
     run_all_case("chrome", i)
+    # 只能同步收集一次
+    # pytest.main(['-s','-v','./Testcase/test_case_login.py'])
 
 
 if __name__ == "__main__":
-    thread_main(count=2)
+    # 打印系统DEBUG日志
+    # 该方法使用@Publicmethod.thread已禁用，使用该方法可触发线程并发浏览器，而测试用例只能收集一次，此时会导致全部作用在同一个session中
+    # import logging
+    # logging.basicConfig(level=logging.DEBUG)
+    # thread_main(count=2)
+    # pytest.main(['-s','-n','2'])
+    # 通过pytest-xdist并发正常
+    run_all_case(0)
 
 # Todo
 # 将thread方法封装一层，不直接写在run.py中 -->over
